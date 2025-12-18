@@ -1,3 +1,5 @@
+# language: fr
+
 Fonctionnalité: Robustesse du protocole réseau
 En tant qu'administrateur système
 Je veux que le serveur rejette les données mal formées

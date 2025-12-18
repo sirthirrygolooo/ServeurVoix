@@ -1,0 +1,29 @@
+image: maven:3.9-eclipse-temurin-17
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - mvn compile
+
+test_job:
+  stage: test
+  script:
+    # installation python3
+    - apt-get update && apt-get install -y python3
+    # ON TEST OKJSDNOJSBNL
+    - mvn test
+  artifacts:
+    when: always
+    reports:
+      junit: target/surefire-reports/TEST-*.xml

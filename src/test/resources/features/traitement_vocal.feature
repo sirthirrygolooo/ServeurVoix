@@ -1,3 +1,5 @@
+# language: fr
+
 Fonctionnalité: Traitement de commande vocale via IA
 En tant qu'application mobile
 Je veux envoyer un fichier audio brut au serveur
@@ -13,7 +15,7 @@ Quand je connecte un socket TCP au serveur
 Et que j'envoie la taille du fichier (Long) suivie des octets du fichier "test.wav"
 Alors le serveur doit sauvegarder le fichier dans "received_audio/"
 Et le serveur doit exécuter le script Python avec ce fichier en argument
-Et je dois recevoir en retour une chaîne de caractères contenant "Analyse terminée"
+Et je dois recevoir en retour une chaîne de caractères contenant "Analyse terminee"
 Et la connexion doit être fermée proprement
 
 Scénario: Gestion de la concurrence (Thread Pool)
