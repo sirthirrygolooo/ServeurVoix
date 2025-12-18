@@ -50,11 +50,11 @@ public class ServeurVoix {
                     DataInputStream dis = new DataInputStream(clientSocket.getInputStream());
                     DataOutputStream dos = new DataOutputStream(clientSocket.getOutputStream())
             ) {
-                // 1. Réception de la taille (Protocole: d'abord un Long)
+                // réception de la taille (Protocole: d'abord un Long)
                 long fileSize = dis.readLong();
                 System.out.println("Taille fichier : " + fileSize + " bytes");
 
-                // 2. Sauvegarde du fichier binaire
+                // sauvegarde du fichier binaire
                 try (FileOutputStream fos = new FileOutputStream(filePath)) {
                     byte[] buffer = new byte[4096];
                     int bytesRead;
@@ -68,7 +68,7 @@ public class ServeurVoix {
 
                 System.out.println("[+] Fichier sauvegardé : " + filePath);
 
-                // 3. Appel au script Python (IA)
+                // appel au script Python (IA à implémenter, mock atm)
                 String iaResponse = callPythonScript(filePath);
 
                 dos.writeUTF(iaResponse);
@@ -91,7 +91,7 @@ public class ServeurVoix {
 
                 Process process = pb.start();
 
-                // Lecture de la sortie du script Python
+                // sortie du script python
                 BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
                 StringBuilder output = new StringBuilder();
                 String line;
@@ -101,7 +101,7 @@ public class ServeurVoix {
 
                 int exitCode = process.waitFor();
                 if (exitCode == 0) {
-                    return output.toString(); // Le résultat de l'IA
+                    return output.toString();
                 } else {
                     return "Erreur IA (Code " + exitCode + "): " + output.toString();
                 }
