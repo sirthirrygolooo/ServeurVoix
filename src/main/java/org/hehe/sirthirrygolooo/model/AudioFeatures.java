@@ -7,14 +7,14 @@ public class AudioFeatures {
     private double silenceRatio;
     public double[] mfccMean;
 
-    // Getters et Setters pour la manipulation
+    // Setters et getter pour manip. des données
     public void setPitchMean(double pitchMean) { this.pitchMean = pitchMean; }
     public void setPitchStdDev(double pitchStdDev) { this.pitchStdDev = pitchStdDev; }
     public void setRmsMean(double rmsMean) { this.rmsMean = rmsMean; }
     public void setSilenceRatio(double silenceRatio) { this.silenceRatio = silenceRatio; }
     public void setMfccMean(double[] mfccMean) { this.mfccMean = mfccMean; }
 
-    // Pour les tests
+
     public double getSilenceRatio() { return silenceRatio; }
 
     public String toJson() {

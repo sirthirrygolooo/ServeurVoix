@@ -20,20 +20,20 @@ public class ClientHandler implements Runnable {
         try (DataInputStream dis = new DataInputStream(clientSocket.getInputStream());
              DataOutputStream dos = new DataOutputStream(clientSocket.getOutputStream())) {
 
-            // 1. Lecture
+            // Lecture données
             long size = dis.readLong();
             if (size > 10 * 1024 * 1024) throw new IOException("Fichier trop lourd");
             byte[] data = new byte[(int) size];
             dis.readFully(data);
 
-            // 2. Traitement (Appel Service)
+            // Traitement via appel fnc d'analyses
             AudioFeatures features = analysisService.analyze(data);
             String json = features.toJson();
 
-            // 3. Envoi Central
+            // Envoi vers le serv TCP
             sendToCentral(json);
 
-            // 4. Ack Mobile
+            // ACK pour client (mobile)
             dos.writeUTF("ACK");
 
         } catch (Exception e) {

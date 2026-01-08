@@ -21,7 +21,7 @@ public class AnalysisSteps {
 
     @When("je traite un fichier audio contenant du silence")
     public void je_traite_silence() throws Exception {
-        // Génération d'un WAV silencieux de 1 seconde à la volée
+        // Génération d'un WAV silencieux de 1 seconde
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         AudioFormat format = new AudioFormat(44100, 16, 1, true, false);
         byte[] silence = new byte[44100 * 2]; // 1 sec de 0

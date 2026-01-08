@@ -4,19 +4,17 @@ services:
 
 variables:
   DOCKER_DRIVER: overlay2
-  # Nom de l'image dans le registre GitLab
   IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 
 stages:
   - test
   - build_push
 
-# Job 1 : Tests unitaires (Maven pur)
+# JOB 1 : Exécution des unit tests Maven
 unit_tests:
   image: maven:3.9-eclipse-temurin-17
   stage: test
   script:
-    # On doit réinstaller la lib ici aussi car c'est un conteneur vierge
     - mvn install:install-file -Dfile=TarsosDSP-2.4.jar -DgroupId=be.tarsos.dsp -DartifactId=core -Dversion=2.5 -Dpackaging=jar
     - mvn test
   artifacts:
@@ -24,7 +22,7 @@ unit_tests:
     reports:
       junit: target/surefire-reports/TEST-*.xml
 
-# Job 2 : Construction et Envoi Docker
+# JOB 2 : Build et Push de l'image Docker
 docker_build:
   stage: build_push
   script:

@@ -1,33 +1,29 @@
 version: '3.8'
 
 services:
-  # --- Serveur d'Analyse Audio (Celui qu'on vient de faire) ---
   server-analyse:
     build: .
     container_name: samsoul-analyse
     ports:
       - "65432:65432"
     environment:
-      - CENTRAL_HOST=server-central # Doit correspondre au nom du service ci-dessous
+      - CENTRAL_HOST=server-central
       - CENTRAL_PORT=9999
     depends_on:
       - server-central
     networks:
       - samsoul-network
 
-  # --- Serveur Central Java (Simulé pour l'exemple) ---
+  # --- Serveur Central Java (Simulé car pas encore relié) ---
   server-central:
-    # Remplacez par le chemin vers le Dockerfile de votre serveur central
-    # build: ../serveur-central
-    image: eclipse-temurin:17-jre-alpine # Placeholder si pas encore prêt
+    image: eclipse-temurin:17-jre-alpine # placeholder
     container_name: samsoul-central
     ports:
       - "9999:9999"
     networks:
       - samsoul-network
 
-  # --- Base de Données (MongoDB) ---
-  # Requis pour le stockage des scores [cite: 108]
+  # --- BDD MongoDB ---
   mongo:
     image: mongo:6.0
     container_name: samsoul-mongo
