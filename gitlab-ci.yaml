@@ -1,29 +1,31 @@
-image: maven:3.9-eclipse-temurin-17
+image: docker:24.0.5
+services:
+  - docker:24.0.5-dind
 
 variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-
-cache:
-  paths:
-    - .m2/repository
+  DOCKER_DRIVER: overlay2
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
 
 stages:
-  - build
   - test
+  - build_push
 
-build_job:
-  stage: build
-  script:
-    - mvn compile
-
-test_job:
+unit_tests:
+  image: maven:3.9-eclipse-temurin-17
   stage: test
   script:
-    # installation python3
-    - apt-get update && apt-get install -y python3
-    # ON TEST OKJSDNOJSBNL
-    - mvn test
+    - mvn clean test
   artifacts:
     when: always
     reports:
       junit: target/surefire-reports/TEST-*.xml
+
+docker_build:
+  stage: build_push
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  only:
+    - main
+    - develop

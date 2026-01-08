@@ -6,7 +6,7 @@ import java.net.*;
 public class ClientTest {
     private static final String SERVER_IP = "localhost";
     private static final int SERVER_PORT = 65432;
-    private static final String TEST_AUDIO_PATH = "C:\\Users\\jbfro\\OneDrive - Université de Franche-Comté (univ-fcomte.fr)\\Info\\S5\\Saé\\ServeurVoix\\src\\main\\java\\org\\hehe\\sirthirrygolooo\\test2.wav";
+    private static final String TEST_AUDIO_PATH = "C:\\Users\\jbfro\\OneDrive - Université de Franche-Comté (univ-fcomte.fr)\\Info\\S5\\Saé\\ServeurVoix\\src\\main\\java\\org\\hehe\\sirthirrygolooo\\test1.wav";
 
     public static void main(String[] args) {
         try (
